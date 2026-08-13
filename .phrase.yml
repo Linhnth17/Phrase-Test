@@ -1,14 +1,16 @@
 # Phrase CLI configuration (Strings)
 # Docs: https://support.phrase.com/hc/en-us/articles/5784093898908
 #
-# Set these before running `phrase push` / `phrase pull` locally or in CI:
-#   PHRASE_ACCESS_TOKEN  - personal access token or project token
-#   PHRASE_PROJECT_ID    - the Phrase project this repo is linked to
+# access_token and project_id are intentionally NOT set here.
+# .phrase.yml does not expand $VAR syntax - it would be read as a
+# literal string and sent as the token (causing 401 Unauthorized).
+# Instead:
+#   - PHRASE_ACCESS_TOKEN is read automatically from the environment.
+#   - project_id is passed explicitly via --project_id on the CLI
+#     command (see .github/workflows/phrase-*.yml), which the shell
+#     expands correctly.
 
 phrase:
-  access_token: $PHRASE_ACCESS_TOKEN
-  project_id: $PHRASE_PROJECT_ID
-
   push:
     sources:
       - file: ./Resources/Resources.resx
