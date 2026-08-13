@@ -3,10 +3,12 @@ name: Push source strings to Phrase
 # Runs whenever the English resx (source of truth) changes on main.
 # Phrase picks up the new/changed keys and they become editable in the Phrase UI.
 on:
+  workflow_dispatch:
   push:
     branches: [main]
     paths:
       - "Resources/Resources.resx"
+      - ".phrase.yml"
 
 jobs:
   push-to-phrase:
