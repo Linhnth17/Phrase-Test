@@ -1,16 +1,18 @@
 # Phrase CLI configuration (Strings)
 # Docs: https://support.phrase.com/hc/en-us/articles/5784093898908
 #
-# access_token and project_id are intentionally NOT set here.
-# .phrase.yml does not expand $VAR syntax - it would be read as a
-# literal string and sent as the token (causing 401 Unauthorized).
-# Instead:
-#   - PHRASE_ACCESS_TOKEN is read automatically from the environment.
-#   - project_id is passed explicitly via --project_id on the CLI
-#     command (see .github/workflows/phrase-*.yml), which the shell
-#     expands correctly.
+# access_token is intentionally NOT set here - .phrase.yml does not
+# expand $VAR syntax (it would be sent as the literal string, causing
+# 401 Unauthorized). It's passed via --access_token on the CLI command
+# instead (see .github/workflows/phrase-*.yml), where the shell
+# expands the PHRASE_ACCESS_TOKEN env var correctly.
+#
+# project_id has no CLI flag equivalent (`phrase push --project_id=..`
+# errors with "unknown flag"), so it must live here. It's not a secret.
 
 phrase:
+  project_id: 676b516aed3001e0832302a9060d154f
+
   push:
     sources:
       - file: ./Resources/Resources.resx

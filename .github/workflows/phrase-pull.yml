@@ -21,7 +21,7 @@ jobs:
           version: 2.28.0
 
       - name: Pull translations from Phrase
-        run: phrase pull --project_id="$PHRASE_PROJECT_ID"
+        run: phrase pull --access_token="$PHRASE_ACCESS_TOKEN"
 
       - name: Open pull request with updated translations
         uses: peter-evans/create-pull-request@v6

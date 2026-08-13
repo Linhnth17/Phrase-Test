@@ -24,4 +24,4 @@ jobs:
           version: 2.28.0
 
       - name: Push strings to Phrase
-        run: phrase push --wait --project_id="$PHRASE_PROJECT_ID"
+        run: phrase push --wait --access_token="$PHRASE_ACCESS_TOKEN"
