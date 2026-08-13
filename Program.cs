@@ -7,3 +7,4 @@ var resources = new ResourceManager("Test_phrase.Resources.Resources", typeof(Pr
 Console.WriteLine(resources.GetString("Greeting", CultureInfo.InvariantCulture));
 Console.WriteLine(resources.GetString("Farewell", CultureInfo.InvariantCulture));
 Console.WriteLine(resources.GetString("OrderConfirmation", CultureInfo.InvariantCulture));
+Console.WriteLine(resources.GetString("WelcomeMessage", CultureInfo.InvariantCulture));

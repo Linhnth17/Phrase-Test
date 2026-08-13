@@ -67,4 +67,7 @@
   <data name="OrderConfirmation" xml:space="preserve">
     <value>Your order has been placed successfully.</value>
   </data>
+  <data name="WelcomeMessage" xml:space="preserve">
+    <value>Welcome back! We missed you.</value>
+  </data>
 </root>
