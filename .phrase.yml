@@ -1,26 +1,24 @@
-# Phrase CLI configuration
-# Docs: https://developers.phrase.com/api/#tag/phrase-cli
+# Phrase CLI configuration (Strings)
+# Docs: https://support.phrase.com/hc/en-us/articles/5784093898908
 #
 # Set these before running `phrase push` / `phrase pull` locally or in CI:
 #   PHRASE_ACCESS_TOKEN  - personal access token or project token
 #   PHRASE_PROJECT_ID    - the Phrase project this repo is linked to
 
 phrase:
-  access_token: ${PHRASE_ACCESS_TOKEN}
-  project_id: ${PHRASE_PROJECT_ID}
+  access_token: $PHRASE_ACCESS_TOKEN
+  project_id: $PHRASE_PROJECT_ID
 
   push:
     sources:
       - file: ./Resources/Resources.resx
-        params:
-          file_format: resx
-          locale_id: en
-          update_translations: true
+        file_format: resx
+        locale_id: en
+        update_translations: true
 
   pull:
     targets:
       - file: ./Resources/Resources.<locale_code>.resx
-        params:
-          file_format: resx
-          # Pulls every locale in the project except the source (en)
-          include_empty_translations: false
+        file_format: resx
+        # Pulls every locale in the project except the source (en)
+        include_empty_translations: false

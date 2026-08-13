@@ -11,13 +11,15 @@ on:
 jobs:
   push-to-phrase:
     runs-on: ubuntu-latest
+    env:
+      PHRASE_ACCESS_TOKEN: ${{ secrets.PHRASE_ACCESS_TOKEN }}
+      PHRASE_PROJECT_ID: ${{ secrets.PHRASE_PROJECT_ID }}
     steps:
       - uses: actions/checkout@v4
 
-      - name: Push strings to Phrase
-        uses: phrase/phrase-cli-action@v2
+      - uses: phrase/setup-cli@v1
         with:
-          command: push
-        env:
-          PHRASE_ACCESS_TOKEN: ${{ secrets.PHRASE_ACCESS_TOKEN }}
-          PHRASE_PROJECT_ID: ${{ secrets.PHRASE_PROJECT_ID }}
+          version: 2.28.0
+
+      - name: Push strings to Phrase
+        run: phrase push --wait

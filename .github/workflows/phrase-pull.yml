@@ -10,16 +10,18 @@ on:
 jobs:
   pull-from-phrase:
     runs-on: ubuntu-latest
+    env:
+      PHRASE_ACCESS_TOKEN: ${{ secrets.PHRASE_ACCESS_TOKEN }}
+      PHRASE_PROJECT_ID: ${{ secrets.PHRASE_PROJECT_ID }}
     steps:
       - uses: actions/checkout@v4
 
-      - name: Pull translations from Phrase
-        uses: phrase/phrase-cli-action@v2
+      - uses: phrase/setup-cli@v1
         with:
-          command: pull
-        env:
-          PHRASE_ACCESS_TOKEN: ${{ secrets.PHRASE_ACCESS_TOKEN }}
-          PHRASE_PROJECT_ID: ${{ secrets.PHRASE_PROJECT_ID }}
+          version: 2.28.0
+
+      - name: Pull translations from Phrase
+        run: phrase pull
 
       - name: Open pull request with updated translations
         uses: peter-evans/create-pull-request@v6

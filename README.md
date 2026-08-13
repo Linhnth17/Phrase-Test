@@ -28,17 +28,27 @@ GitHub Actions: phrase-pull.yml  ──►  phrase pull  ──►  tạo PR m�
 ## Những gì demo này đã dựng sẵn (chạy local được)
 
 - Cấu trúc `Resources/Resources.resx` + code đọc resource trong [`Program.cs`](Program.cs).
-- Config `.phrase.yml` và 2 workflow GitHub Actions theo đúng pattern chính thức của Phrase (dùng action `phrase/phrase-cli-action`).
-- Git repo local với các commit minh họa từng bước.
+- Config `.phrase.yml` và 2 workflow GitHub Actions dùng action chính thức [`phrase/setup-cli`](https://github.com/phrase/setup-cli) để cài Phrase CLI, sau đó chạy `phrase push` / `phrase pull`.
+- Git repo (đã push lên [Linhnth17/Phrase-Test](https://github.com/Linhnth17/Phrase-Test)) với các commit minh họa từng bước.
 
-## Những gì cần bạn tự làm để chạy "live" (cần tài khoản/quyền thật)
+## Các bước để kết nối với project Phrase thật
 
-1. Tạo project trên [phrase.com](https://phrase.com), lấy `PHRASE_ACCESS_TOKEN` và `PHRASE_PROJECT_ID`.
-2. Tạo repo GitHub thật, push repo này lên.
-3. Vào repo Settings → Secrets → thêm `PHRASE_ACCESS_TOKEN`, `PHRASE_PROJECT_ID`.
-4. Trong Phrase, bật GitHub integration hoặc để 2 workflow trên tự chạy — khi đó:
-   - Push string mới → tự lên Phrase UI để dịch.
-   - Sau khi dịch xong trên Phrase → workflow `phrase-pull.yml` tạo PR chứa file `Resources.<locale>.resx` (ví dụ `Resources.fr.resx`, `Resources.vi.resx`) để merge vào `main`.
+1. Đăng nhập [phrase.com](https://phrase.com) (hoặc tạo account), tạo một **Strings project** mới (hoặc dùng project có sẵn).
+2. Lấy 2 giá trị từ Phrase:
+   - **Project ID**: trong project → Settings → xem "Project ID".
+   - **Access Token**: Account Settings → API Access → tạo Personal Access Token (cần quyền đọc/ghi lên project đó).
+3. Vào repo GitHub → **Settings → Secrets and variables → Actions → New repository secret**, thêm 2 secret:
+   - `PHRASE_ACCESS_TOKEN`
+   - `PHRASE_PROJECT_ID`
+   (`.phrase.yml` trong repo đã tham chiếu 2 biến này sẵn, không cần sửa file này.)
+4. Kiểm tra `Resources/Resources.resx` khớp với ngôn ngữ nguồn (`locale_id: en`) đã cấu hình trong `.phrase.yml` — nếu source locale trên Phrase khác `en`, sửa lại giá trị này.
+5. Chạy thử thủ công để kiểm tra kết nối trước khi để workflow tự động chạy:
+   ```bash
+   export PHRASE_ACCESS_TOKEN=xxx
+   export PHRASE_PROJECT_ID=xxx
+   phrase push --wait   # đẩy Resources.resx lên Phrase, tạo/khớp key
+   ```
+6. Sau khi push thành công, string sẽ xuất hiện trong Phrase UI để dịch. Dịch xong (hoặc đánh dấu "reviewed"), chạy workflow `phrase-pull.yml` (Actions tab → Run workflow, hoặc chờ lịch chạy) → workflow tạo PR chứa `Resources.<locale>.resx` (ví dụ `Resources.fr.resx`) để bạn review & merge vào `main`.
 
 ## Chạy thử phần code
 
