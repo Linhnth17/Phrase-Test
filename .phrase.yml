@@ -13,12 +13,14 @@ phrase:
     sources:
       - file: ./Resources/Resources.resx
         file_format: resx
-        locale_id: en
-        update_translations: true
+        params:
+          locale_id: en
+          update_translations: true
 
   pull:
     targets:
       - file: ./Resources/Resources.<locale_code>.resx
         file_format: resx
-        # Pulls every locale in the project except the source (en)
-        include_empty_translations: false
+        params:
+          # Pulls every locale in the project except the source (en)
+          include_empty_translations: false
