@@ -1,0 +1,35 @@
+name: Pull translations from Phrase
+
+# Runs on demand (or on a schedule) to fetch whatever translators have
+# edited/completed in the Phrase UI, then raises a PR back into main.
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 3 * * *" # daily at 03:00 UTC
+
+jobs:
+  pull-from-phrase:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Pull translations from Phrase
+        uses: phrase/phrase-cli-action@v2
+        with:
+          command: pull
+        env:
+          PHRASE_ACCESS_TOKEN: ${{ secrets.PHRASE_ACCESS_TOKEN }}
+          PHRASE_PROJECT_ID: ${{ secrets.PHRASE_PROJECT_ID }}
+
+      - name: Open pull request with updated translations
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: "chore(i18n): update translations from Phrase"
+          title: "chore(i18n): update translations from Phrase"
+          body: |
+            Automated update pulled from Phrase.
+            Review the translated `Resources.*.resx` files before merging.
+          branch: phrase-translations-update
+          delete-branch: true
+          add-paths: |
+            Resources/Resources.*.resx
