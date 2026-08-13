@@ -64,4 +64,7 @@
   <data name="Farewell" xml:space="preserve">
     <value>Goodbye, see you soon!</value>
   </data>
+  <data name="OrderConfirmation" xml:space="preserve">
+    <value>Your order has been placed successfully.</value>
+  </data>
 </root>
