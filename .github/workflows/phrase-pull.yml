@@ -26,6 +26,16 @@ jobs:
       - name: Pull translations from Phrase
         run: phrase pull --access_token="$PHRASE_ACCESS_TOKEN"
 
+      # `phrase pull` has no way to exclude the source locale (en) from
+      # a <locale_code> target pattern, so it re-downloads it as a
+      # redundant Resources.en.resx alongside the real Resources.resx.
+      # Delete those before they can be picked up by the PR.
+      - name: Remove redundant source-locale (en) exports
+        run: |
+          rm -f Properties/Resources.en.resx
+          rm -f OrderService/Properties/Resources.en.resx
+          rm -f PaymentService/Properties/Resources.en.resx
+
       - name: Open pull request with updated translations
         uses: peter-evans/create-pull-request@v6
         with:
