@@ -8,4 +8,15 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <!-- OrderService/ and PaymentService/ are separate sibling projects living
+       under this folder; exclude them from this project's default globs. -->
+  <ItemGroup>
+    <Compile Remove="OrderService/**" />
+    <Compile Remove="PaymentService/**" />
+    <EmbeddedResource Remove="OrderService/**" />
+    <EmbeddedResource Remove="PaymentService/**" />
+    <None Remove="OrderService/**" />
+    <None Remove="PaymentService/**" />
+  </ItemGroup>
+
 </Project>

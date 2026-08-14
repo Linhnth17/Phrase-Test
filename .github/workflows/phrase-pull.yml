@@ -34,4 +34,6 @@ jobs:
           branch: phrase-translations-update
           delete-branch: true
           add-paths: |
-            Resources/Resources.*.resx
+            Properties/Resources.*.resx
+            OrderService/Properties/Resources.*.resx
+            PaymentService/Properties/Resources.*.resx

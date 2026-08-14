@@ -7,7 +7,9 @@ on:
   push:
     branches: [main]
     paths:
-      - "Resources/Resources.resx"
+      - "Properties/Resources.resx"
+      - "OrderService/Properties/Resources.resx"
+      - "PaymentService/Properties/Resources.resx"
       - ".phrase.yml"
 
 jobs:

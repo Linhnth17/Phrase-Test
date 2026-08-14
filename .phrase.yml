@@ -9,22 +9,52 @@
 #
 # project_id has no CLI flag equivalent (`phrase push --project_id=..`
 # errors with "unknown flag"), so it must live here. It's not a secret.
+#
+# 3 projects, 3 separate resx files -> each source/target is tagged so
+# keys don't mix and pull routes translations back to the right file.
 
 phrase:
   project_id: 676b516aed3001e0832302a9060d154f
 
   push:
     sources:
-      - file: ./Resources/Resources.resx
+      - file: ./Properties/Resources.resx
         file_format: resx
         params:
           locale_id: en
           update_translations: true
+          tag: mainapp
+
+      - file: ./OrderService/Properties/Resources.resx
+        file_format: resx
+        params:
+          locale_id: en
+          update_translations: true
+          tag: orderservice
+
+      - file: ./PaymentService/Properties/Resources.resx
+        file_format: resx
+        params:
+          locale_id: en
+          update_translations: true
+          tag: paymentservice
 
   pull:
     targets:
-      - file: ./Resources/Resources.<locale_code>.resx
+      - file: ./Properties/Resources.<locale_code>.resx
         file_format: resx
         params:
-          # Pulls every locale in the project except the source (en)
           include_empty_translations: false
+          tags: mainapp
+
+      - file: ./OrderService/Properties/Resources.<locale_code>.resx
+        file_format: resx
+        params:
+          include_empty_translations: false
+          tags: orderservice
+
+      - file: ./PaymentService/Properties/Resources.<locale_code>.resx
+        file_format: resx
+        params:
+          include_empty_translations: false
+          tags: paymentservice
