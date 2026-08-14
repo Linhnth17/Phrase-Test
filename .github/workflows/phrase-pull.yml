@@ -7,6 +7,10 @@ on:
   schedule:
     - cron: "0 3 * * *" # daily at 03:00 UTC
 
+permissions:
+  contents: write
+  pull-requests: write
+
 jobs:
   pull-from-phrase:
     runs-on: ubuntu-latest
