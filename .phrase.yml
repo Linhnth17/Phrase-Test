@@ -12,6 +12,8 @@
 #
 # 3 projects, 3 separate resx files -> each source/target is tagged so
 # keys don't mix and pull routes translations back to the right file.
+# `tag`/`tags` must be a top-level key on the source/target entry, not
+# nested under `params` (CLI errors with "invalid keys: tag" otherwise).
 
 phrase:
   project_id: 676b516aed3001e0832302a9060d154f
@@ -20,41 +22,41 @@ phrase:
     sources:
       - file: ./Properties/Resources.resx
         file_format: resx
+        tag: mainapp
         params:
           locale_id: en
           update_translations: true
-          tag: mainapp
 
       - file: ./OrderService/Properties/Resources.resx
         file_format: resx
+        tag: orderservice
         params:
           locale_id: en
           update_translations: true
-          tag: orderservice
 
       - file: ./PaymentService/Properties/Resources.resx
         file_format: resx
+        tag: paymentservice
         params:
           locale_id: en
           update_translations: true
-          tag: paymentservice
 
   pull:
     targets:
       - file: ./Properties/Resources.<locale_code>.resx
         file_format: resx
+        tags: mainapp
         params:
           include_empty_translations: false
-          tags: mainapp
 
       - file: ./OrderService/Properties/Resources.<locale_code>.resx
         file_format: resx
+        tags: orderservice
         params:
           include_empty_translations: false
-          tags: orderservice
 
       - file: ./PaymentService/Properties/Resources.<locale_code>.resx
         file_format: resx
+        tags: paymentservice
         params:
           include_empty_translations: false
-          tags: paymentservice
