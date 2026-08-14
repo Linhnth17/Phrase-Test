@@ -39,4 +39,7 @@
   <data name="OrderCancelled" xml:space="preserve">
     <value>Your order has been cancelled.</value>
   </data>
+  <data name="OrderConfirmed" xml:space="preserve">
+    <value>Your order has been confirmed.</value>
+  </data>
 </root>
