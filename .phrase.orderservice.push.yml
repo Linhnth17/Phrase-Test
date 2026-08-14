@@ -1,0 +1,12 @@
+# Push config for the OrderService project only.
+# Run with: phrase push --config=.phrase.orderservice.push.yml --tag=orderservice
+phrase:
+  project_id: 676b516aed3001e0832302a9060d154f
+
+  push:
+    sources:
+      - file: ./OrderService/Properties/Resources.resx
+        file_format: resx
+        params:
+          locale_id: en
+          update_translations: true

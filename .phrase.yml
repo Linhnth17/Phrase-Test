@@ -1,4 +1,4 @@
-# Phrase CLI configuration (Strings)
+# Phrase CLI configuration (Strings) - used for `phrase pull`.
 # Docs: https://support.phrase.com/hc/en-us/articles/5784093898908
 #
 # access_token is intentionally NOT set here - .phrase.yml does not
@@ -10,53 +10,34 @@
 # project_id has no CLI flag equivalent (`phrase push --project_id=..`
 # errors with "unknown flag"), so it must live here. It's not a secret.
 #
-# 3 projects, 3 separate resx files -> each source/target is tagged so
-# keys don't mix and pull routes translations back to the right file.
-# `tag`/`tags` must be a top-level key on the source/target entry, not
-# nested under `params` (CLI errors with "invalid keys: tag" otherwise).
+# Pull supports filtering per target via params.tags (verified locally
+# with the real CLI). Push does NOT support a per-source tag key at
+# all (top-level or under params) - "tag" only exists as a --tag flag
+# on the whole `phrase push` command, applying to everything it
+# uploads in that one run. So pushing 3 differently-tagged projects
+# needs 3 separate invocations with 3 separate config files - see
+# .phrase.mainapp.push.yml / .phrase.orderservice.push.yml /
+# .phrase.paymentservice.push.yml and .github/workflows/phrase-push.yml.
 
 phrase:
   project_id: 676b516aed3001e0832302a9060d154f
-
-  push:
-    sources:
-      - file: ./Properties/Resources.resx
-        file_format: resx
-        tag: mainapp
-        params:
-          locale_id: en
-          update_translations: true
-
-      - file: ./OrderService/Properties/Resources.resx
-        file_format: resx
-        tag: orderservice
-        params:
-          locale_id: en
-          update_translations: true
-
-      - file: ./PaymentService/Properties/Resources.resx
-        file_format: resx
-        tag: paymentservice
-        params:
-          locale_id: en
-          update_translations: true
 
   pull:
     targets:
       - file: ./Properties/Resources.<locale_code>.resx
         file_format: resx
-        tags: mainapp
         params:
           include_empty_translations: false
+          tags: mainapp
 
       - file: ./OrderService/Properties/Resources.<locale_code>.resx
         file_format: resx
-        tags: orderservice
         params:
           include_empty_translations: false
+          tags: orderservice
 
       - file: ./PaymentService/Properties/Resources.<locale_code>.resx
         file_format: resx
-        tags: paymentservice
         params:
           include_empty_translations: false
+          tags: paymentservice

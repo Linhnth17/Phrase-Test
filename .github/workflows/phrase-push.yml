@@ -10,20 +10,28 @@ on:
       - "Properties/Resources.resx"
       - "OrderService/Properties/Resources.resx"
       - "PaymentService/Properties/Resources.resx"
-      - ".phrase.yml"
+      - ".phrase*.yml"
 
 jobs:
   push-to-phrase:
     runs-on: ubuntu-latest
     env:
       PHRASE_ACCESS_TOKEN: ${{ secrets.PHRASE_ACCESS_TOKEN }}
-      PHRASE_PROJECT_ID: ${{ secrets.PHRASE_PROJECT_ID }}
     steps:
       - uses: actions/checkout@v4
 
       - uses: phrase/setup-cli@v1
         with:
-          version: 2.28.0
+          version: 2.65.0
 
-      - name: Push strings to Phrase
-        run: phrase push --wait --access_token="$PHRASE_ACCESS_TOKEN"
+      # `phrase push` has no per-source `tag` option in .phrase.yml (only
+      # a --tag flag for the whole invocation), so each project is pushed
+      # separately with its own config + tag to keep keys distinguishable.
+      - name: Push mainapp strings to Phrase
+        run: phrase push --wait --config=.phrase.mainapp.push.yml --tag=mainapp --access_token="$PHRASE_ACCESS_TOKEN"
+
+      - name: Push OrderService strings to Phrase
+        run: phrase push --wait --config=.phrase.orderservice.push.yml --tag=orderservice --access_token="$PHRASE_ACCESS_TOKEN"
+
+      - name: Push PaymentService strings to Phrase
+        run: phrase push --wait --config=.phrase.paymentservice.push.yml --tag=paymentservice --access_token="$PHRASE_ACCESS_TOKEN"

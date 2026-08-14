@@ -1,0 +1,12 @@
+# Push config for the PaymentService project only.
+# Run with: phrase push --config=.phrase.paymentservice.push.yml --tag=paymentservice
+phrase:
+  project_id: 676b516aed3001e0832302a9060d154f
+
+  push:
+    sources:
+      - file: ./PaymentService/Properties/Resources.resx
+        file_format: resx
+        params:
+          locale_id: en
+          update_translations: true
