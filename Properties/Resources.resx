@@ -73,4 +73,7 @@
   <data name="AutoTranslateTest" xml:space="preserve">
     <value>This string should be auto-translated by Phrase.</value>
   </data>
+  <data name="AutoTranslateTest2" xml:space="preserve">
+    <value>Please confirm that the settings have been updated.</value>
+  </data>
 </root>
