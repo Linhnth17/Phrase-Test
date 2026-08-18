@@ -10,3 +10,4 @@ phrase:
         params:
           locale_id: en
           update_translations: true
+          autotranslate: true

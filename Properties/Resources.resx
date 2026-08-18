@@ -70,4 +70,7 @@
   <data name="WelcomeMessage" xml:space="preserve">
     <value>Welcome back! We missed you.</value>
   </data>
+  <data name="AutoTranslateTest" xml:space="preserve">
+    <value>This string should be auto-translated by Phrase.</value>
+  </data>
 </root>
