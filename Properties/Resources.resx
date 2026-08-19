@@ -61,19 +61,19 @@
   <data name="Greeting" xml:space="preserve">
     <value>Hello, World!</value>
   </data>
-  <data name="Farewell" xml:space="preserve">
-    <value>Goodbye, see you soon!</value>
-  </data>
   <data name="OrderConfirmation" xml:space="preserve">
     <value>Your order has been placed successfully.</value>
   </data>
   <data name="WelcomeMessage" xml:space="preserve">
-    <value>Welcome back! We missed you.</value>
+    <value>Welcome back! We really missed you.</value>
   </data>
   <data name="AutoTranslateTest" xml:space="preserve">
     <value>This string should be auto-translated by Phrase.</value>
   </data>
   <data name="AutoTranslateTest2" xml:space="preserve">
     <value>Please confirm that the settings have been updated.</value>
+  </data>
+  <data name="AutoTranslateTest3" xml:space="preserve">
+    <value>This is a brand new key added in this test.</value>
   </data>
 </root>
