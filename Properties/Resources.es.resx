@@ -34,6 +34,6 @@
     <value>Su pedido se ha realizado con éxito.</value>
   </data>
   <data name="WelcomeMessage" xml:space="preserve">
-    <value>¡Bienvenido de nuevo! Te echamos de menos.</value>
+    <value>¡Bienvenido de nuevo! Te hemos echado mucho de menos. [EDITED MANUALLY IN GIT]</value>
   </data>
 </root>
