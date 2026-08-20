@@ -19,6 +19,8 @@ jobs:
       PHRASE_ACCESS_TOKEN: ${{ secrets.PHRASE_ACCESS_TOKEN }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2   # need HEAD^ to diff against for changed-key detection
 
       - uses: phrase/setup-cli@v1
         with:
@@ -35,3 +37,10 @@ jobs:
 
       - name: Push PaymentService strings to Phrase
         run: phrase push --wait --config=.phrase.paymentservice.push.yml --tag=paymentservice --access_token="$PHRASE_ACCESS_TOKEN"
+
+      # Phrase doesn't flag a translation as stale when its source text
+      # changes (confirmed by testing) - so detect changed keys ourselves
+      # via git diff, then explicitly mark their non-English translations
+      # "unverified" so they surface in Phrase's own Verification-required view.
+      - name: Flag translations of changed keys for re-review
+        run: python3 scripts/flag_changed_keys_for_review.py
