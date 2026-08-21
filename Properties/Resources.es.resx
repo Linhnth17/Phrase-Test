@@ -24,6 +24,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AutoTranslateTest2" xml:space="preserve">
+    <value>Por favor, confirma que la configuración ha sido actualizada.</value>
+  </data>
+  <data name="AutoTranslateTest3" xml:space="preserve">
+    <value>Esta es una clave completamente nueva añadida en esta prueba.</value>
+  </data>
   <data name="Farewell" xml:space="preserve">
     <value>¡Adiós, hasta pronto!</value>
   </data>
